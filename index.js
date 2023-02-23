@@ -30,3 +30,20 @@ const pokemons = [
     likes: 11,
   },
 ];
+
+
+// to get something by id use #
+// to get something by class use .
+const test2 = document.querySelector('div')
+const test = document.querySelectorAll('div')
+
+console.log(test)
+console.log(test2)
+
+const welcomeP = document.createElement('p')
+
+welcomeP.innerHTML = '<span class="hello"> hello world </span>'
+
+test2.appendChild(welcomeP)
+
+welcomeP.remove()
