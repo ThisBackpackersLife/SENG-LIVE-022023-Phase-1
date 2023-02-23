@@ -33,8 +33,33 @@ const pokemon = [
 
 const pokeContainer = document.querySelector("#poke-container");
 const pokeForm = document.querySelector("#poke-form");
+pokeForm.addEventListener("submit", (e) => {
+  e.preventDefault()
+  
+  const name = document.getElementById('name-input').value
+  const image = document.getElementById('img-input').value
 
+  // create a pokemon object
+  const newPokemon = {
+    id: pokemon.length + 1,
+    name: name,
+    img: image,
+    likes: 0
+  }
+
+  pokemon.push(newPokemon)
+  renderPokemon(newPokemon)
+
+  pokeForm.requestFullscreen()
+})
+
+// for each object element
+// in the pokemon array of objects
+// call renderPokemon 
+// pass in one pokemon object
+// at a time as the argument
 pokemon.forEach(function (character) {
+  console.log(character)
   renderPokemon(character);
 });
 
@@ -59,10 +84,19 @@ function renderPokemon(char) {
   const likesBttn = document.createElement("button");
   likesBttn.className = "like-bttn";
   likesBttn.textContent = "♥";
+  
+  likesBttn.addEventListener("click", () => {
+    char.likes += 1
+    likesNum.textContent = char.likes;
+  });
 
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "delete-bttn";
   deleteBtn.textContent = "Delete";
+  
+  deleteBtn.addEventListener("click", () => {
+    pokeCard.remove()
+  })
 
   pokeCard.append(pokeImg, pokeName, pokeLikes, likesNum, likesBttn, deleteBtn);
   pokeContainer.appendChild(pokeCard);
