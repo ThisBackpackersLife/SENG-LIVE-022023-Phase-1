@@ -1,38 +1,52 @@
-const pokemon = [
-  {
-    id: 1,
-    name: "bulbasaur",
-    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
-    likes: 4,
-  },
-  {
-    id: 2,
-    name: "ivysaur",
-    img: "https://images.cults3d.com/6VgkTLM1j-CTAMhEJTtsRV1z6N8=/516x516/https://files.cults3d.com/uploaders/14845535/illustration-file/5d09c257-51ed-4d65-aa36-3f9201af34c4/ivysaur.png",
-    likes: 21,
-  },
-  {
-    id: 3,
-    name: "venusaur",
-    img: "https://images.saymedia-content.com/.image/t_share/MTc2MjYwODQ5NTk2NTcyODYy/pokemon-venusaur-nicknames.png",
-    likes: 7,
-  },
-  {
-    id: 4,
-    name: "charmander",
-    img: "https://pixy.org/download/1207107/",
-    likes: 20,
-  },
-  {
-    id: 5,
-    name: "charmeleon",
-    img: "https://static.pokemonpets.com/images/monsters-images-800-800/5-Charmeleon.webp",
-    likes: 11,
-  },
-];
+// const pokemon = [
+//   {
+//     id: 1,
+//     name: "bulbasaur",
+//     img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+//     likes: 4,
+//   },
+//   {
+//     id: 2,
+//     name: "ivysaur",
+//     img: "https://images.cults3d.com/6VgkTLM1j-CTAMhEJTtsRV1z6N8=/516x516/https://files.cults3d.com/uploaders/14845535/illustration-file/5d09c257-51ed-4d65-aa36-3f9201af34c4/ivysaur.png",
+//     likes: 21,
+//   },
+//   {
+//     id: 3,
+//     name: "venusaur",
+//     img: "https://images.saymedia-content.com/.image/t_share/MTc2MjYwODQ5NTk2NTcyODYy/pokemon-venusaur-nicknames.png",
+//     likes: 7,
+//   },
+//   {
+//     id: 4,
+//     name: "charmander",
+//     img: "https://pixy.org/download/1207107/",
+//     likes: 20,
+//   },
+//   {
+//     id: 5,
+//     name: "charmeleon",
+//     img: "https://static.pokemonpets.com/images/monsters-images-800-800/5-Charmeleon.webp",
+//     likes: 11,
+//   },
+// ];
 
 const pokeContainer = document.querySelector("#poke-container");
 const pokeForm = document.querySelector("#poke-form");
+
+function getPokemon() {
+  fetch("http://localhost:3000/characters")
+  .then((response) => {
+    return response.json()
+  })
+  .then((characters) => {
+    characters.forEach((character) => {
+      renderPokemon(character);
+    });
+  })
+}
+
+getPokemon()
 
 pokeForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -50,9 +64,9 @@ pokeForm.addEventListener("submit", function (e) {
   pokeForm.reset();
 });
 
-pokemon.forEach(function (character) {
-  renderPokemon(character);
-});
+// pokemon.forEach(function (character) {
+//   renderPokemon(character);
+// });
 
 function renderPokemon(char) {
   const pokeCard = document.createElement("div");
@@ -98,4 +112,11 @@ function renderPokemon(char) {
 
 function showCharacter(character) {
   // Write code here
+  fetch(`http://localhost:3000/characters/${character.id}`)
+    .then((response) => response.json())
+    .then((character) => {
+     const pokemonCard = renderPokemon(character)
+     pokemonCard.id = 'poke-show-card'
+     pokeContainer.replaceChildren(pokemonCard)
+    })
 }
