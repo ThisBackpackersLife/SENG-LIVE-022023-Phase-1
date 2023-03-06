@@ -29,6 +29,12 @@
       "name": "charmeleon",
       "img": "https://static.pokemonpets.com/images/monsters-images-800-800/5-Charmeleon.webp",
       "likes": 11
+    },
+    {
+      "id": 6,
+      "name": "test",
+      "img": "test",
+      "likes": 0
     }
   ],
   "comments": [
