@@ -42,7 +42,17 @@ pokeForm.addEventListener("submit", createPokemon);
 const increaseLikes = (e, char, likeNum) => {
   e.stopPropagation();
   ++char.likes;
-  likeNum.textContent = char.likes;
+  fetch(`http://localhost:3000/characters/${char.id}`, {
+    method: 'PATCH',
+    headers: {
+      'content-Type': 'application/json'
+    },
+    body: JSON.stringify({ likes: char.likes})
+  })
+  .then((response) => response.json())
+  .then((charData) => likeNum.textContent = charData.likes)
+  // optimistic:
+  // likeNum.textContent = char.likes;
 };
 
 const renderComment = (comment, commentsDiv) => {
@@ -154,7 +164,12 @@ const renderPokemon = (char) => {
   deleteBttn.textContent = "delete";
   deleteBttn.addEventListener("click", (e) => {
     e.stopPropagation();
-    pokeCard.remove();
+    fetch(`http://localhost:3000/characters/${char.id}`, {
+      method: 'DELETE'
+    })
+    .then((response) => response.json())
+    .then(() => pokeCard.remove())
+  
   });
 
   pokeCard.append(pokeImg, pokeName, pokeLikes, likeNum, likesBttn, deleteBttn);

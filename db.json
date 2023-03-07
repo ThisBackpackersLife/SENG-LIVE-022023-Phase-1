@@ -4,7 +4,7 @@
       "id": 1,
       "name": "bulbasaur",
       "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
-      "likes": 4
+      "likes": 16
     },
     {
       "id": 2,
@@ -22,13 +22,13 @@
       "id": 4,
       "name": "charmander",
       "img": "https://pixy.org/download/1207107/",
-      "likes": 20
+      "likes": 24
     },
     {
       "id": 5,
       "name": "charmeleon",
       "img": "https://static.pokemonpets.com/images/monsters-images-800-800/5-Charmeleon.webp",
-      "likes": 11
+      "likes": 21
     }
   ],
   "comments": [
